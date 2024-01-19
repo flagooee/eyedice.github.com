@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Dados</title>
+</head>
+<body>
+  <h1 style="color: white; text-align: center;">Dados</h1>
+
+  <div id="container">
+    <div id="botoes" style="text-align: center;">
+      <button id="1" style="width: 40px; height: 40px; font-size: 16px;">1</button>
+      <button id="2" style="width: 40px; height: 40px; font-size: 16px;">2</button>
+      <button id="3" style="width: 40px; height: 40px; font-size: 16px;">3</button>
+      <br>
+      <button id="4" style="width: 40px; height: 40px; font-size: 16px;">4</button>
+      <button id="5" style="width: 40px; height: 40px; font-size: 16px;">5</button>
+    </div>
+
+    <div id="resultados" style="text-align: center; margin-top: -10px;">
+      <p id="resultado" style="color: white; font-size: 48px;"></p>
+    </div>
+  </div>
+
+  <!-- Nova aba "Críticos" -->
+  <div id="criticos" style="float: right; margin-right: 5px; margin-top: -15px;">
+    <h3 style="color: white;">Críticos</h3>
+    <p style="color: white;">
+      1 = 24<br>
+      2 = 28<br>
+      3 = 32<br>
+      4 = 36<br>
+      5 = 40
+    </p>
+  </div>
+
+  <!-- Áudio no Google Drive -->
+  <audio id="audio" controls style="display: none;">
+    <source src="SEU_LINK_DIRETO_DO_GOOGLE_DRIVE_AQUI" type="audio/mp3">
+    Seu navegador não suporta a tag de áudio.
+  </audio>
+
+  <div id="historico" style="margin-top: 60px; text-align: center;">
+    <h3 style="color: white;">Histórico</h3>
+    <p id="historico-resultado" style="color: white;"></p>
+  </div>
+
+  <style>
+    body {
+      width: 800px;
+      margin: 0 auto;
+      background-color: black;
+    }
+
+    #container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #botoes {
+      width: 240px; /* Ajustei o tamanho para acomodar os botões */
+      height: 80px;
+      margin: 0 auto;
+    }
+
+    #botoes button {
+      width: 40px;
+      height: 40px;
+      font-size: 16px;
+      margin-right: 5px;
+    }
+
+    #resultados {
+      width: 240px; /* Ajustei o tamanho para acomodar os botões */
+      height: 50px;
+      margin: -10px auto 0;
+    }
+
+    #historico {
+      width: 200px;
+      height: 50px;
+      margin: 60px auto 0;
+    }
+
+    #historico-resultado {
+      color: white;
+    }
+
+    /* Estilo para a nova aba "Críticos" */
+    #criticos {
+      float: right;
+      margin-right: 5px;
+      margin-top: -15px;
+      color: white;
+    }
+  </style>
+
+  <script>
+    let historico = [];
+    const audioElement = document.getElementById("audio");
+
+    function rolarDado() {
+      let valorBotao = parseInt(this.id);
+      let resultado = Math.floor(Math.random() * 20) + 1;
+      let valorAdicional = valorBotao * 4;
+
+      let resultadoFinal = resultado + valorAdicional;
+
+      // Destaca o número em amarelo se for o máximo permitido pelo botão
+      if (resultadoFinal === (valorBotao * 4) + 20) {
+        document.getElementById("resultado").style.color = "yellow";
+        playSound();
+      } else {
+        document.getElementById("resultado").style.color = "white";
+      }
+
+      document.getElementById("resultado").innerHTML = resultadoFinal;
+
+      historico.push({ resultado: resultadoFinal, botao: valorBotao });
+
+      if (historico.length > 5) {
+        historico.shift();
+      }
+
+      atualizarHistorico();
+    }
+
+    function atualizarHistorico() {
+      let html = "";
+      for (let i = historico.length - 1; i >= 0; i--) {
+        html += historico[i].resultado + " (" + historico[i].botao + ")" + "<br>";
+      }
+      document.getElementById("historico-resultado").innerHTML = html;
+    }
+
+    function playSound() {
+      audioElement.currentTime = 0;
+      audioElement.play();
+    }
+
+    document.getElementById("1").addEventListener("click", rolarDado);
+    document.getElementById("2").addEventListener("click", rolarDado);
+    document.getElementById("3").addEventListener("click", rolarDado);
+    document.getElementById("4").addEventListener("click", rolarDado);
+    document.getElementById("5").addEventListener("click", rolarDado);
+  </script>
+</body>
+</html>
