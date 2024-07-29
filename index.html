@@ -3,98 +3,115 @@
 <head>
   <meta charset="UTF-8">
   <title>Dados</title>
-</head>
-<body>
-  <h1 style="color: white; text-align: center;">Dados</h1>
-
-  <div id="container">
-    <div id="botoes" style="text-align: center;">
-      <button id="1" style="width: 40px; height: 40px; font-size: 16px;">1</button>
-      <button id="2" style="width: 40px; height: 40px; font-size: 16px;">2</button>
-      <button id="3" style="width: 40px; height: 40px; font-size: 16px;">3</button>
-      <br>
-      <button id="4" style="width: 40px; height: 40px; font-size: 16px;">4</button>
-      <button id="5" style="width: 40px; height: 40px; font-size: 16px;">5</button>
-    </div>
-
-    <div id="resultados" style="text-align: center; margin-top: -10px;">
-      <p id="resultado" style="color: white; font-size: 48px;"></p>
-    </div>
-  </div>
-
-  <!-- Nova aba "Críticos" -->
-  <div id="criticos" style="float: right; margin-right: 5px; margin-top: -15px;">
-    <h3 style="color: white;">Críticos</h3>
-    <p style="color: white;">
-      1 = 24<br>
-      2 = 28<br>
-      3 = 32<br>
-      4 = 36<br>
-      5 = 40
-    </p>
-  </div>
-
-  <!-- Áudio no Google Drive -->
-  <audio id="audio" controls style="display: none;">
-    <source src="SEU_LINK_DIRETO_DO_GOOGLE_DRIVE_AQUI" type="audio/mp3">
-    Seu navegador não suporta a tag de áudio.
-  </audio>
-
-  <div id="historico" style="margin-top: 60px; text-align: center;">
-    <h3 style="color: white;">Histórico</h3>
-    <p id="historico-resultado" style="color: white;"></p>
-  </div>
-
   <style>
     body {
-      width: 800px;
-      margin: 0 auto;
-      background-color: black;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #121212;
+      color: white;
+    }
+
+    h1, h3 {
+      margin: 0.5em 0;
     }
 
     #container {
       display: flex;
       flex-direction: column;
       align-items: center;
+      padding: 20px;
+      background-color: #1f1f1f;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
     }
 
     #botoes {
-      width: 240px; /* Ajustei o tamanho para acomodar os botões */
-      height: 80px;
-      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 10px;
+      margin: 20px 0;
     }
 
     #botoes button {
-      width: 40px;
-      height: 40px;
-      font-size: 16px;
-      margin-right: 5px;
+      width: 60px;
+      height: 60px;
+      font-size: 18px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #botoes button:hover {
+      background-color: #555;
     }
 
     #resultados {
-      width: 240px; /* Ajustei o tamanho para acomodar os botões */
-      height: 50px;
-      margin: -10px auto 0;
+      font-size: 48px;
+      margin-bottom: 20px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #criticos {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #1f1f1f;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
     }
 
     #historico {
-      width: 200px;
-      height: 50px;
-      margin: 60px auto 0;
+      margin-top: 20px;
     }
 
     #historico-resultado {
-      color: white;
-    }
-
-    /* Estilo para a nova aba "Críticos" */
-    #criticos {
-      float: right;
-      margin-right: 5px;
-      margin-top: -15px;
-      color: white;
+      text-align: center;
     }
   </style>
+</head>
+<body>
+  <h1>Dados</h1>
+
+  <div id="container">
+    <div id="botoes">
+      <button id="1">1</button>
+      <button id="2">2</button>
+      <button id="3">3</button>
+      <button id="4">4</button>
+      <button id="5">5</button>
+    </div>
+
+    <div id="resultados">
+      <p id="resultado"></p>
+    </div>
+  </div>
+
+  <div id="criticos">
+    <h3>Críticos</h3>
+    <p>1 = 24<br>2 = 28<br>3 = 32<br>4 = 36<br>5 = 40</p>
+  </div>
+
+  <audio id="audio" controls style="display: none;">
+    <source src="https://drive.google.com/file/d/1enncUJl4hlLK1dKAEsfpFHxM5LCTRGvr/view?usp=sharing" type="audio/mp3">
+    Seu navegador não suporta a tag de áudio.
+  </audio>
+
+  <div id="historico">
+    <h3>Histórico</h3>
+    <p id="historico-resultado"></p>
+  </div>
 
   <script>
     let historico = [];
